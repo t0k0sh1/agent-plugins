@@ -1,6 +1,6 @@
 {
   "name": "thinking",
-  "description": "Generate and refine plans, strategies, and solutions with Claude's advanced reasoning capabilities, enabling complex problem-solving and decision-making.",
+  "description": "Brainstorm ideas into designs and implementation plans through collaborative dialogue before any creative or implementation work.",
   "version": "1.0.0",
   "author": {
     "name": "Takashi Yamashina",

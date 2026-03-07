@@ -8,7 +8,7 @@ description: Push git commits
 - Current git status: !`git status`
 - Current branch: !`git branch --show-current`
 - Recent commits: !`git log --oneline -10`
-- Push commits: !`git push`
+- Unpushed commits: !`git log --oneline @{u}..HEAD`
 
 ## Your task
 

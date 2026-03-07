@@ -1,0 +1,9 @@
+{
+  "name": "serena",
+  "description": "Provide codebase-aware assistance using Serena for semantic code analysis and navigation",
+  "version": "1.0.0",
+  "author": {
+    "name": "Takashi Yamashina",
+    "email": "takashi.yamashina@gmail.com"
+  }
+}

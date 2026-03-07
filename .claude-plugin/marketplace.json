@@ -43,6 +43,28 @@
       },
       "source": "./plugins/thinking",
       "category": "productivity"
+    },
+    {
+      "name": "serena",
+      "description": "Provide codebase-aware assistance using Serena for semantic code analysis and navigation",
+      "version": "1.0.0",
+      "author": {
+        "name": "Takashi Yamashina",
+        "email": "takashi.yamashina@gmail.com"
+      },
+      "source": "./plugins/serena",
+      "category": "productivity"
+    },
+    {
+      "name": "github",
+      "description": "Interact with GitHub repositories, issues, pull requests, and more through the GitHub MCP server",
+      "version": "1.0.0",
+      "author": {
+        "name": "Takashi Yamashina",
+        "email": "takashi.yamashina@gmail.com"
+      },
+      "source": "./plugins/github",
+      "category": "productivity"
     }
   ]
 }

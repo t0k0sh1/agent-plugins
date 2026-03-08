@@ -23,25 +23,14 @@
       "category": "productivity"
     },
     {
-      "name": "create",
-      "description": "Create, evaluate, and iteratively improve Claude Code skills with test-driven feedback loops and benchmarking.",
+      "name": "rule-creator",
+      "description": "Generate project-specific Claude Code rules (.claude/rules/) by analyzing the codebase.",
       "version": "1.0.0",
       "author": {
         "name": "Takashi Yamashina",
         "email": "takashi.yamashina@gmail.com"
       },
-      "source": "./plugins/create",
-      "category": "productivity"
-    },
-    {
-      "name": "thinking",
-      "description": "Generate and refine plans, strategies, and solutions with Claude's advanced reasoning capabilities, enabling complex problem-solving and decision-making.",
-      "version": "1.0.0",
-      "author": {
-        "name": "Takashi Yamashina",
-        "email": "takashi.yamashina@gmail.com"
-      },
-      "source": "./plugins/thinking",
+      "source": "./plugins/rule-creator",
       "category": "productivity"
     },
     {

@@ -1,5 +1,5 @@
 ---
-name: create-rule
+name: rule-creator
 description: "Generate project-specific Claude Code rules (.claude/rules/) by analyzing the codebase. Use this skill when the user wants to create, add, or set up rules for their project, establish coding conventions, or configure path-scoped instructions for Claude."
 ---
 
@@ -18,6 +18,7 @@ This skill analyzes a project's codebase to detect its technology stack, then pr
 Scan the project to understand its technology stack and conventions. Look for:
 
 **Language & framework indicators:**
+
 - `package.json` (Node.js — check for React, Next.js, Vue, Express, etc.)
 - `tsconfig.json` (TypeScript)
 - `go.mod` (Go)
@@ -30,6 +31,7 @@ Scan the project to understand its technology stack and conventions. Look for:
 - `*.swift`, `Package.swift` (Swift)
 
 **Build & tooling indicators:**
+
 - `.eslintrc*`, `biome.json`, `.prettierrc` (linting/formatting)
 - `jest.config.*`, `vitest.config.*`, `pytest.ini`, `.rspec` (testing)
 - `Dockerfile`, `docker-compose.yml` (containerization)
@@ -37,6 +39,7 @@ Scan the project to understand its technology stack and conventions. Look for:
 - `.github/workflows/` (CI/CD)
 
 **Existing Claude configuration:**
+
 - `.claude/rules/` (existing rules — avoid duplication)
 - `CLAUDE.md` (existing project instructions — complement, don't repeat)
 - `.claude/settings.json` (permissions and tool config)
@@ -47,16 +50,16 @@ Report findings concisely to the user before proceeding.
 
 Based on the analysis, propose relevant rule categories. Common categories include:
 
-| Category | When to propose | Example paths |
-|----------|----------------|---------------|
-| Code style | Always | `src/**/*.{ts,tsx}` |
-| Testing conventions | Test framework detected | `tests/**/*`, `**/*.test.*` |
-| API design | API routes/controllers found | `src/api/**/*`, `src/routes/**/*` |
-| Database | ORM/migration files found | `**/migrations/**`, `**/models/**` |
-| Security | Auth/crypto code found | `src/auth/**/*`, `**/*.env*` |
-| Documentation | Docs directory exists | `docs/**/*`, `**/*.md` |
-| Component patterns | UI framework detected | `src/components/**/*` |
-| Build & CI | CI config found | `.github/**/*`, `Dockerfile` |
+| Category            | When to propose              | Example paths                      |
+| ------------------- | ---------------------------- | ---------------------------------- |
+| Code style          | Always                       | `src/**/*.{ts,tsx}`                |
+| Testing conventions | Test framework detected      | `tests/**/*`, `**/*.test.*`        |
+| API design          | API routes/controllers found | `src/api/**/*`, `src/routes/**/*`  |
+| Database            | ORM/migration files found    | `**/migrations/**`, `**/models/**` |
+| Security            | Auth/crypto code found       | `src/auth/**/*`, `**/*.env*`       |
+| Documentation       | Docs directory exists        | `docs/**/*`, `**/*.md`             |
+| Component patterns  | UI framework detected        | `src/components/**/*`              |
+| Build & CI          | CI config found              | `.github/**/*`, `Dockerfile`       |
 
 Present the proposed categories with a brief explanation of what each rule would cover. Ask the user which ones they want, and if they have additional categories in mind.
 
@@ -98,6 +101,7 @@ paths:
 ```
 
 **Writing guidelines:**
+
 - Keep rules concise — short, actionable bullet points
 - Explain reasoning when it isn't obvious (the model responds better to understanding why)
 - Use `paths:` to scope rules to relevant files — avoid global rules unless truly universal

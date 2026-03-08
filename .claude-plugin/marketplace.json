@@ -43,17 +43,6 @@
       },
       "source": "./plugins/serena",
       "category": "productivity"
-    },
-    {
-      "name": "github",
-      "description": "Interact with GitHub repositories, issues, pull requests, and more through the GitHub MCP server",
-      "version": "1.0.0",
-      "author": {
-        "name": "Takashi Yamashina",
-        "email": "takashi.yamashina@gmail.com"
-      },
-      "source": "./plugins/github",
-      "category": "productivity"
     }
   ]
 }

@@ -33,26 +33,16 @@ You MUST create a task for each of these items and complete them in order:
 
 ## Process Flow
 
-```dot
-digraph brainstorming {
-    "Explore project context" [shape=box];
-    "Ask clarifying questions" [shape=box];
-    "Propose 2-3 approaches" [shape=box];
-    "Present design sections" [shape=box];
-    "User approves design?" [shape=diamond];
-    "Write design doc" [shape=box];
-    "Write implementation plan" [shape=box];
-    "Offer execution choice" [shape=doublecircle];
-
-    "Explore project context" -> "Ask clarifying questions";
-    "Ask clarifying questions" -> "Propose 2-3 approaches";
-    "Propose 2-3 approaches" -> "Present design sections";
-    "Present design sections" -> "User approves design?";
-    "User approves design?" -> "Present design sections" [label="no, revise"];
-    "User approves design?" -> "Write design doc" [label="yes"];
-    "Write design doc" -> "Write implementation plan";
-    "Write implementation plan" -> "Offer execution choice";
-}
+```mermaid
+flowchart TD
+    A[Explore project context] --> B[Ask clarifying questions]
+    B --> C[Propose 2-3 approaches]
+    C --> D[Present design sections]
+    D --> E{User approves design?}
+    E -- "no, revise" --> D
+    E -- "yes" --> F[Write design doc]
+    F --> G[Write implementation plan]
+    G --> H([Offer execution choice])
 ```
 
 ---

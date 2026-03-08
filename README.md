@@ -1,30 +1,24 @@
 # agent-plugins
 
-A collection of Claude Code plugins that enhance your development workflow with git operations, project scaffolding, GitHub integration, semantic code analysis, and structured brainstorming.
+A collection of Claude Code plugins that enhance your development workflow with git operations, semantic code analysis, and rule generation.
 
 ## Plugins
 
 | Plugin | Description |
 |--------|-------------|
 | **git** | Streamline your git workflow with simple commands for committing, pushing, and creating pull requests |
-| **create** | Create, evaluate, and iteratively improve Claude Code skills with test-driven feedback loops and benchmarking |
-| **github** | Interact with GitHub repositories, issues, pull requests, and more through the GitHub MCP server |
+| **rule-creator** | Generate project-specific Claude Code rules (.claude/rules/) by analyzing the codebase |
 | **serena** | Provide codebase-aware assistance using Serena for semantic code analysis and navigation |
-| **thinking** | Brainstorm ideas into designs and implementation plans through collaborative dialogue before any creative or implementation work |
 
 ## Installation
 
-Install a plugin using the `claude plugin add` command:
+Add the marketplace and install plugins:
 
 ```bash
-claude plugin add /path/to/agent-plugins/plugins/<plugin-name>
-```
-
-For example:
-
-```bash
-claude plugin add /path/to/agent-plugins/plugins/git
-claude plugin add /path/to/agent-plugins/plugins/thinking
+claude marketplace add t0k0sh1/agent-plugins
+claude plugin add git
+claude plugin add rule-creator
+claude plugin add serena
 ```
 
 ## License

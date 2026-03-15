@@ -43,6 +43,17 @@
       },
       "source": "./plugins/serena",
       "category": "productivity"
+    },
+    {
+      "name": "review",
+      "description": "Run CodeRabbit code reviews and apply suggested fixes",
+      "version": "1.0.0",
+      "author": {
+        "name": "Takashi Yamashina",
+        "email": "takashi.yamashina@gmail.com"
+      },
+      "source": "./plugins/review",
+      "category": "productivity"
     }
   ]
 }

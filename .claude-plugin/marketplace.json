@@ -54,6 +54,17 @@
       },
       "source": "./plugins/review",
       "category": "productivity"
+    },
+    {
+      "name": "refactor",
+      "description": "Simplify and refactor code by detecting duplication, unnecessary complexity, and naming issues",
+      "version": "1.0.0",
+      "author": {
+        "name": "Takashi Yamashina",
+        "email": "takashi.yamashina@gmail.com"
+      },
+      "source": "./plugins/refactor",
+      "category": "productivity"
     }
   ]
 }

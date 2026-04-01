@@ -6,40 +6,40 @@ description: Fetch PR review comments, triage them, and apply fixes
 ## Context
 
 - Current branch: !`git branch --show-current`
-- PR info: !`gh pr view --json number,title,url,reviewDecision 2>/dev/null || echo "No PR found"`
+- PR info: !`gh pr view --json number,title,url,reviewDecision,isDraft 2>/dev/null || echo "No PR found"`
 
 ## Your task
 
-PRのレビューコメントを取得し、トリアージして修正を適用する。ユーザーの入力: $ARGUMENTS
+Fetch PR review comments, triage them, and apply fixes. User input: $ARGUMENTS
 
-### Step 1: PR特定
+### Step 1: Identify PR
 
-- ユーザーがPR番号を指定した場合（例: `#123` や `123`）、その番号を使う
-- 指定がなければ、現在のブランチに紐づくPRを使う（上記Contextから取得）
-- PRが見つからない場合、以下を表示して停止:
-  > 対象のPRが見つかりません。PRが存在するブランチで実行するか、PR番号を指定してください。
+- If the user specified a PR number (e.g. `#123` or `123`), use that number
+- Otherwise, use the PR associated with the current branch (from the Context above)
+- If no PR is found, display the following and stop:
+  > No PR found. Run this command on a branch with an associated PR, or specify a PR number.
 
-### Step 2: レビューコメント取得
+### Step 2: Fetch review comments
 
-リポジトリ情報を `gh repo view --json owner,name --jq '.owner.login + "/" + .name'` で取得し、以下の2つのAPIを呼び出す:
+Get repository info with `gh repo view --json owner,name --jq '.owner.login + "/" + .name'` and call the following two APIs:
 
-1. `gh api repos/{owner}/{repo}/pulls/{number}/comments` — インラインコメント（ファイル・行に紐づくコメント）
-2. `gh api repos/{owner}/{repo}/pulls/{number}/reviews` — レビューサマリ（全体コメント）
+1. `gh api repos/{owner}/{repo}/pulls/{number}/comments` — inline comments (attached to specific files/lines)
+2. `gh api repos/{owner}/{repo}/pulls/{number}/reviews` — review summaries (general comments)
 
-レビューコメントが1件もない場合、以下を表示して停止:
-> レビューコメントはありません。
+If there are no review comments at all, display the following and stop:
+> No review comments found.
 
-### Step 3: トリアージ分類
+### Step 3: Triage classification
 
-各コメントを以下の3カテゴリに分類する:
+Classify each comment into one of the following 3 categories:
 
-1. **Auto-fix** — `suggestion` ブロック付きの明確な修正提案、または客観的なバグ指摘（タイポ、型エラー、null未チェック等）。ただし解決済み（resolved）でないこと
-2. **Needs confirmation** — 設計変更、リファクタリング提案、トレードオフのある最適化、自動判断が困難なもの
-3. **Skip** — 解決済みのコメント、LGTM/称賛、質問のみで具体的な修正提案がないもの
+1. **Auto-fix** — Comments with a `suggestion` block or objective bug reports (typos, type errors, missing null checks, etc.). Must not be resolved.
+2. **Needs confirmation** — Design changes, refactoring proposals, optimization trade-offs, or anything difficult to auto-judge.
+3. **Skip** — Resolved comments, LGTM/praise, or questions without specific fix suggestions.
 
-### Step 4: サマリテーブル表示
+### Step 4: Summary table
 
-全コメントの分類結果をテーブルで表示する:
+Display the classification results for all comments in a table:
 
 | # | Category | Reviewer | File | Line | Summary |
 |---|----------|----------|------|------|---------|
@@ -47,17 +47,19 @@ PRのレビューコメントを取得し、トリアージして修正を適用
 | 2 | Needs confirmation | ... | ... | ... | ... |
 | 3 | Skip | ... | ... | ... | ... |
 
-### Step 5: 修正適用
+### Step 5: Apply fixes
 
-- **Auto-fix**: 対象ファイルをReadで読み取り、Editで修正を即座に適用する
-- **Needs confirmation**: ユーザーにどれを適用するか確認し、承認されたもののみ修正する
-- **Skip**: 何もしない
+- **Auto-fix**: Read the target file with `Read` and apply the fix immediately with `Edit`
+- **Needs confirmation**: Ask the user which ones to apply, and only fix those that are approved
+- **Skip**: Do nothing
 
-### Step 6: レポート
+### Step 6: Report
 
-修正完了後、以下のサマリを表示する:
+After all fixes are applied, display a summary including:
 
-- 自動修正した件数
-- ユーザー承認で修正した件数
-- スキップした件数
-- 変更したファイルの一覧
+- Number of auto-fixed items
+- Number of user-approved fixes
+- Number of skipped items
+- List of modified files
+
+**Important**: Do NOT commit or push changes. The user will do so explicitly.
